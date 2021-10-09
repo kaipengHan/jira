@@ -57,3 +57,15 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 4. yarn add eslint-config-prettier -D 忽略 prettier 和 eslint 的影响 配置请参照 package.json
 
 以上完成之后 当你提交代码时会自动格式化（prettier）代码 webstorm 设置->prettier->ctrl+alt_l(格式化代码)时运行 prettier
+
+type:
+
+- feat：新功能（feature）
+- fix：修补 bug
+- docs：文档（documentation）
+- style： 格式（不影响代码运行的变动）
+- refactor：重构（即不是新增功能，也不是修改 bug 的代码变动）
+- test：增加测试
+- chore：构建过程或辅助工具的变动
+- upgrade： 第三方库升级
+- revert：回滚
