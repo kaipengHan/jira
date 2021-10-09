@@ -44,3 +44,16 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+/public/manifest.json pwa
+/public/robots.txt 搜索引擎相关
+
+# 配置 prettier
+
+1. yarn add prettier --save
+2. 添加.prettierignore .prettierrc.json 手动添加 因为用 echo 的方式创建的文件默认是 utf-16 的，可能会与编辑器的字符串冲突导致报错
+   vscode 编辑器可能需要重新设置字符集
+3. npx mrm@2 lint-staged package.json 文件会自动有变化
+4. yarn add eslint-config-prettier -D 忽略 prettier 和 eslint 的影响 配置请参照 package.json
+
+以上完成之后 当你提交代码时会自动格式化（prettier）代码 webstorm 设置->prettier->ctrl+alt_l(格式化代码)时运行 prettier
