@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import List from "./list";
 import SearchPanel from "./search-panel";
-import { cleanObject, useMount } from "../../utils";
+import { cleanObject, useDebounce, useMount } from "../../utils";
 import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -10,6 +10,7 @@ const ProjectListScreen = () => {
     name: "",
     personId: "",
   });
+  const debounceParam = useDebounce(param, 200);
   const [list, setList] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -21,7 +22,8 @@ const ProjectListScreen = () => {
         }
       }
     );
-  }, [param]);
+    // eslint-disable-next-line
+  }, [debounceParam]);
 
   useMount(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {

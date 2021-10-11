@@ -1,6 +1,21 @@
 import React from "react";
 
-const List = ({ users, list }) => {
+type ProjectType = {
+  id: number;
+  name: string;
+  personId: number;
+  organization: string;
+  created: number;
+};
+type Users = {
+  id: number;
+  name: string;
+};
+interface ListProps {
+  users: Users[];
+  list: ProjectType[];
+}
+const List = ({ users, list }: ListProps) => {
   return (
     <table>
       <thead>
