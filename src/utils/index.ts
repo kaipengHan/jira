@@ -46,5 +46,5 @@ export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
     // eslint-disable-next-line
-  }, []); // eslint-disable-next-line
+  }, []);
 };
