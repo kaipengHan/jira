@@ -69,3 +69,7 @@ type:
 - chore：构建过程或辅助工具的变动
 - upgrade： 第三方库升级
 - revert：回滚
+
+# 问题
+
+- React Hook "useDebounce" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function
