@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export const isFalsy = (value: any) => (value === 0 ? false : !value);
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 export const isVoid = (value: any) =>
   value === undefined || value === null || value === "";
@@ -31,7 +31,7 @@ export const debounce = (func: () => void, wait?: number) => {
   };
 };
 
-export const useDebounce = (value: any, wait?: number) => {
+export const useDebounce = (value: unknown, wait?: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
   useEffect(() => {
     let timer = setTimeout(() => setDebounceValue(value), wait);

@@ -15,13 +15,14 @@ const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(
-      async (response) => {
-        if (response.ok) {
-          setList(await response.json());
-        }
+    // @ts-ignore
+    fetch(
+      `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
+    ).then(async (response) => {
+      if (response.ok) {
+        setList(await response.json());
       }
-    );
+    });
     // eslint-disable-next-line
   }, [debounceParam]);
 
