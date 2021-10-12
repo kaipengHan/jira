@@ -31,7 +31,7 @@ export const debounce = (func: () => void, wait?: number) => {
   };
 };
 
-export const useDebounce = (value: unknown, wait?: number) => {
+export const useDebounce = <V>(value: V, wait?: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
   useEffect(() => {
     let timer = setTimeout(() => setDebounceValue(value), wait);

@@ -15,7 +15,6 @@ const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // @ts-ignore
     fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
     ).then(async (response) => {
