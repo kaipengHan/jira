@@ -48,3 +48,18 @@ export const useMount = (callback: () => void) => {
     // eslint-disable-next-line
   }, []);
 };
+
+export const useArray = <P>(persons: P[]) => {
+  const [_persons, _setPersons] = useState<P[]>(persons);
+  function add(person: P) {
+    const newPerson = _persons.concat([person]);
+    _setPersons(newPerson);
+  }
+  function removeIndex(index: number) {
+    _setPersons(_persons.filter((_, i) => i !== index));
+  }
+  function clear() {
+    _setPersons([]);
+  }
+  return { value: _persons, add, removeIndex, clear };
+};
