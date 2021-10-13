@@ -84,3 +84,7 @@ type:
 [使用方法](https://www.npmjs.com/package/jira-dev-tool)
 使用该方式后即可删除掉 json-server 相关内容 **json_server_mock**文件夹 package.json 文件中相关内容，
 为了以后使用，这里保留
+
+# unauthenticated-app
+
+非登录状态下的展示
