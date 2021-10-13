@@ -77,3 +77,9 @@ type:
 # json-server 配置自定义请求
 
 在**json.server_mock**文件下添加 middleware.js 文件 package.json 中修改 json-server 的参数
+
+# service-worker
+
+[使用方法](https://www.npmjs.com/package/jira-dev-tool)
+使用该方式后即可删除掉 json-server 相关内容 **json_server_mock**文件夹 package.json 文件中相关内容，
+为了以后使用，这里保留
