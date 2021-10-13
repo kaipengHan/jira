@@ -7,9 +7,10 @@ type ProjectType = {
   organization: string;
   created: number;
 };
-type Users = {
+export type Users = {
   id: number;
   name: string;
+  token: string;
 };
 interface ListProps {
   users: Users[];

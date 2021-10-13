@@ -73,6 +73,7 @@ type:
 # 问题
 
 - React Hook "useDebounce" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function
+- ![img.png](img.png) 如果出现此错误，请运行 npx msw init public
 
 # json-server 配置自定义请求
 
