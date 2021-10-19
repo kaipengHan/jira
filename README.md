@@ -88,3 +88,5 @@ type:
 # unauthenticated-app
 
 非登录状态下的展示
+
+当请求出错时 fetchAPI 并不会给我们自动抛出异常 在封装的时候请手动抛出异常 fetch().catch(() => console.log('并不会接收到异常'))
