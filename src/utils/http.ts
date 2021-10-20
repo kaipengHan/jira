@@ -27,19 +27,21 @@ export const http = async (
   } else {
     config.body = JSON.stringify(data || {});
   }
-  return window.fetch(`${apiUrl}/endpoint`, config).then(async (response) => {
-    if (response.status === 401) {
-      await logout();
-      window.location.reload();
-      return Promise.reject("请重新登录");
-    }
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    } else {
-      return Promise.reject(data);
-    }
-  });
+  return window
+    .fetch(`${apiUrl}/${endpoint}`, config)
+    .then(async (response) => {
+      if (response.status === 401) {
+        await logout();
+        window.location.reload();
+        return Promise.reject("请重新登录");
+      }
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        return Promise.reject(data);
+      }
+    });
 };
 
 export const useHttp = () => {

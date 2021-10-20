@@ -20,12 +20,12 @@ interface AuthForm {
   password: string;
 }
 
+// 初始化user 防止刷新页面丢失user
 const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
   if (token) {
     const data = await http("me", { token });
-    console.log("data", data);
     user = data.user;
   }
   return user;
