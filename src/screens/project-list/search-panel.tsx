@@ -1,4 +1,5 @@
 import React from "react";
+import { Form, Input, Select } from "antd";
 
 type Users = {
   id: number;
@@ -14,24 +15,29 @@ interface SearchPanelProps {
 }
 const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return (
-    <form>
-      <input
-        type="text"
-        value={param.name}
-        onChange={(e) => setParam({ ...param, name: e.target.value })}
-      />
-      <select
-        value={param.personId}
-        onChange={(e) => setParam({ ...param, personId: e.target.value })}
-      >
-        <option value={""}>负责人</option>
-        {users.map((item) => (
-          <option value={item.id} key={item.id}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </form>
+    <Form style={{ marginBottom: "2rem" }} layout={"inline"}>
+      <Form.Item>
+        <Input
+          placeholder={"请输入名称"}
+          type="text"
+          value={param.name}
+          onChange={(e) => setParam({ ...param, name: e.target.value })}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={param.personId}
+          onChange={(e) => setParam({ ...param, personId: e })}
+        >
+          <Select.Option value={""}>负责人</Select.Option>
+          {users.map((item) => (
+            <Select.Option value={item.id} key={item.id}>
+              {item.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+    </Form>
   );
 };
 

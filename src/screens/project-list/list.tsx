@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
+import dayjs from "dayjs";
 
 type ProjectType = {
   id: number;
@@ -19,10 +20,15 @@ interface ListProps {
   list: ProjectType[];
 }
 const List = ({ users, list }: ListProps) => {
+  console.log(list);
   const columns: ColumnsType<ProjectType> = [
     {
       title: "名称",
       dataIndex: "name",
+    },
+    {
+      title: "部门",
+      dataIndex: "organization",
     },
     {
       title: "负责人",
@@ -33,6 +39,14 @@ const List = ({ users, list }: ListProps) => {
           </span>
         );
       },
+    },
+    {
+      title: "创建时间",
+      render: (value) => (
+        <div>
+          {value.created ? dayjs(value.created).format("YYYY-MM-DD") : "无"}
+        </div>
+      ),
     },
   ];
   return (

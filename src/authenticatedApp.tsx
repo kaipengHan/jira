@@ -3,6 +3,8 @@ import ProjectListScreen from "./screens/project-list";
 import { useAuth } from "./context/auth-context";
 import styled from "@emotion/styled";
 import { Row } from "components/Lib";
+import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
+import { Button, Dropdown, Menu } from "antd";
 
 /**
  * grid 和 flex 各自的应用场景
@@ -31,22 +33,36 @@ const Header = styled(Row)`
 const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
 const Main = styled.main`
-  display: flex;
-  overflow: hidden;
+  //display: flex;
+  //overflow: hidden;
 `;
 
 const AuthenticatedApp = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   return (
     <Container>
       <Header between={true}>
         <HeaderLeft gap={true}>
-          <h3>logo</h3>
+          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
           <h3>项目</h3>
           <h3>列表</h3>
         </HeaderLeft>
         <HeaderRight>
-          <button onClick={logout}>登出</button>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key={"logout"}>
+                  <Button type={"link"} onClick={logout}>
+                    登出
+                  </Button>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button type={"link"} onClick={(e) => e.preventDefault()}>
+              Hi,{user?.name}
+            </Button>
+          </Dropdown>
         </HeaderRight>
       </Header>
       <Main>

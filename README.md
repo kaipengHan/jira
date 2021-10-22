@@ -74,6 +74,7 @@ type:
 
 - React Hook "useDebounce" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function
 - ![img.png](img.png) 如果出现此错误，请运行 npx msw init public
+- 引入 svg 后在项目中以 svg 的形式显示 而不是 img 标签形式展示 import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg'; 参照 src/authenticatedApp 中引入方式
 
 # json-server 配置自定义请求
 
