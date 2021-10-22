@@ -4,14 +4,22 @@ export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const isVoid = (value: any) =>
   value === undefined || value === null || value === "";
 
-export const cleanObject = (object: object) => {
+// let a: object
+// a = {name: 'jack'}
+// a = () => {
+// }
+// a = new RegExp('')
+//
+// let b: { [key: string]: unknown }  控制键值对的对象
+// b = {name: 'Jack'}
+// b = () => {}
+// 在一个函数里，改变传入的对象本身是不好的
+export const cleanObject = (object: { [key: string]: unknown }) => {
   // Object.assign({}, object)
   const result = { ...object };
   Object.keys(result).forEach((key) => {
-    // @ts-ignore
     const value = result[key];
     if (isVoid(value)) {
-      // @ts-ignore
       delete result[key];
     }
   });

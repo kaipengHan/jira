@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { loadDevTools } from "jira-dev-tool"; // service-worker替代json-server
+import { DevTools, loadServer } from "jira-dev-tool"; // service-worker替代json-server
 import "antd/dist/antd.less"; // 务必在jira-dev-tool后面引入
 import AppProviders from "./context";
 
-loadDevTools(() => {
+loadServer(() => {
   ReactDOM.render(
     <React.StrictMode>
       <AppProviders>
+        <DevTools />
         <App />
       </AppProviders>
     </React.StrictMode>,
