@@ -1,12 +1,12 @@
 import React, { ReactNode, useState } from "react";
-import { Users } from "../screens/project-list/list";
+import { User } from "types/user";
 import * as auth from "../../src/auth-provider";
 import { http } from "../utils/http";
 import { useMount } from "../utils";
 
 const AuthContext = React.createContext<
   | {
-      user: Users | null;
+      user: User | null;
       register: (form: AuthForm) => Promise<void>;
       login: (form: AuthForm) => Promise<void>;
       logout: () => Promise<void>;
@@ -32,14 +32,14 @@ const bootstrapUser = async () => {
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<Users | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   useMount(() => {
     bootstrapUser().then(setUser);
   });
   const login = (form: AuthForm) =>
-    auth.login(form).then((user) => setUser(user));
+    auth.login(form).then((users) => setUser(users));
   const register = (form: AuthForm) =>
-    auth.register(form).then((user) => setUser(user));
+    auth.register(form).then((users) => setUser(users));
   const logout = () => auth.logout().then(() => setUser(null));
   return (
     <AuthContext.Provider

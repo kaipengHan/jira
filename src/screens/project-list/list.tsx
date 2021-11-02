@@ -1,27 +1,15 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
+import { User } from "types/user";
+import { Project } from "types/project";
 
-type ProjectType = {
-  id: number;
-  name: string;
-  personId: number;
-  organization: string;
-  created: number;
-};
-export type Users = {
-  id: number;
-  name: string;
-  token: string;
-};
-interface ListProps {
-  users: Users[];
-  list: ProjectType[];
+interface ListProps extends TableProps<Project> {
+  users: User[];
 }
-const List = ({ users, list }: ListProps) => {
-  console.log(list);
-  const columns: ColumnsType<ProjectType> = [
+const List = ({ users, ...props }: ListProps) => {
+  const columns: ColumnsType<Project> = [
     {
       title: "名称",
       dataIndex: "name",
@@ -50,12 +38,7 @@ const List = ({ users, list }: ListProps) => {
     },
   ];
   return (
-    <Table
-      rowKey={"id"}
-      columns={columns}
-      dataSource={list}
-      pagination={false}
-    />
+    <Table rowKey={"id"} columns={columns} pagination={false} {...props} />
     // <table>
     //   <thead>
     //     <tr>

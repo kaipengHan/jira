@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import List from "./list";
 import SearchPanel from "./search-panel";
-import { cleanObject, useDebounce, useMount } from "../../utils";
-import { useHttp } from "../../utils/http";
+import { useDebounce, useMount } from "../../utils";
+import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
+import { useProjects } from "utils/project";
+import { Project } from "types/project";
 
 const ProjectListScreen = () => {
-  const [param, setParam] = useState({
+  const [param, setParam] = useState<Partial<Project>>({
     name: "",
     personId: "",
   });
   const debounceParam = useDebounce(param, 200);
-  const [list, setList] = useState([]);
   const [users, setUsers] = useState([]);
   const client = useHttp();
-
-  useEffect(() => {
-    client("projects", { data: cleanObject(debounceParam) }).then(setList);
-    // eslint-disable-next-line
-  }, [debounceParam]);
-
+  const { isLoading, data: list } = useProjects(debounceParam);
   useMount(() => {
     client("users").then(setUsers);
   });
@@ -27,7 +23,7 @@ const ProjectListScreen = () => {
     <Container>
       <h1>项目列表</h1>
       <SearchPanel users={users} param={param} setParam={setParam} />
-      <List users={users} list={list} />
+      <List loading={isLoading} users={users} dataSource={list || []} />
     </Container>
   );
 };
