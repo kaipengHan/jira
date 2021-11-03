@@ -10,8 +10,16 @@ const defaultInitialState: State<null> = {
   data: null,
   error: null,
 };
+const defaultConfig = {
+  throwOnError: false,
+};
 
-export const useAsync = <D>(initialState?: State<D>) => {
+// typeof str 获取str数据的类型
+export const useAsync = <D>(
+  initialState?: State<D>,
+  initialConfig?: typeof defaultConfig
+) => {
+  const config = { ...defaultConfig, ...initialConfig };
   const [state, setState] = useState<State<D>>({
     ...defaultInitialState,
     ...initialState,
@@ -41,6 +49,7 @@ export const useAsync = <D>(initialState?: State<D>) => {
       })
       .catch((error) => {
         setError(error);
+        if (config.throwOnError) throw new Error(error);
         return error;
       });
   };

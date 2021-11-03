@@ -33,13 +33,13 @@ export const http = async (
       if (response.status === 401) {
         await logout();
         window.location.reload();
-        return Promise.reject("请重新登录");
+        return Promise.reject(await response.json());
       }
       const data = await response.json();
       if (response.ok) {
         return data;
       } else {
-        return Promise.reject(data);
+        return Promise.reject(await response.json());
       }
     });
 };
