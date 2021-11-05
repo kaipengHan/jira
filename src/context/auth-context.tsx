@@ -4,7 +4,7 @@ import * as auth from "../../src/auth-provider";
 import { http } from "../utils/http";
 import { useMount } from "../utils";
 import { useAsync } from "../utils/use-async";
-import { FullPageErrorFallback, FullPageLoading } from "../components/Lib";
+import { FullPageLoading } from "../components/Lib";
 
 const AuthContext = React.createContext<
   | {
@@ -37,8 +37,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   // const [user, setUser] = useState<User | null>(null);
   const {
     run,
-    isError,
-    error,
     isIdle,
     isLoading,
     setData: setUser,
@@ -48,14 +46,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     run(bootstrapUser());
     // bootstrapUser().then(setUser);
   });
-  debugger;
   if (isIdle || isLoading) {
     return <FullPageLoading />;
   }
 
-  if (isError) {
-    return <FullPageErrorFallback error={error} />;
-  }
   const login = (form: AuthForm) =>
     auth.login(form).then((users) => setUser(users));
   const register = (form: AuthForm) =>
