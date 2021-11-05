@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import List from "./list";
 import SearchPanel from "./search-panel";
-import { useDebounce, useMount } from "../../utils";
+import { useDebounce, useDocumentTitle, useMount } from "../../utils";
 import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
@@ -14,6 +14,7 @@ const ProjectListScreen = () => {
   });
   const debounceParam = useDebounce(param, 200);
   const [users, setUsers] = useState([]);
+  useDocumentTitle("项目列表", true);
   const client = useHttp();
   const { isLoading, data: list } = useProjects(debounceParam);
   useMount(() => {

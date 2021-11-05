@@ -7,6 +7,7 @@ import { useAsync } from "../utils/use-async";
 const LoginScreen = ({ onError }: { onError: (error: Error) => void }) => {
   const { login } = useAuth();
   const { run, isLoading } = useAsync();
+  // useDocumentTitle('登录和注册');
   const handleSubmit = async (event: {
     username: string;
     password: string;
