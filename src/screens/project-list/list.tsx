@@ -4,15 +4,20 @@ import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import { User } from "types/user";
 import { Project } from "types/project";
+// react-router 和 react-router-dom的关系，类似于 react 和 react-dom/react-native/react-vr...
+import { Link } from "react-router-dom";
 
 interface ListProps extends TableProps<Project> {
   users: User[];
 }
+// <Link to={String(project.id)}> 会默认认为是当前路由下的子路由
 const List = ({ users, ...props }: ListProps) => {
   const columns: ColumnsType<Project> = [
     {
       title: "名称",
-      dataIndex: "name",
+      render: (_, project) => {
+        return <Link to={String(project.id)}>{project.name}</Link>;
+      },
     },
     {
       title: "部门",
