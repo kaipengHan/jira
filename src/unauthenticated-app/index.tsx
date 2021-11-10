@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+import { useDocumentTitle } from "../utils";
 
 const Container = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ const Header = styled.header`
 const UnauthenticatedApp = () => {
   const [register, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  useDocumentTitle("请登录注册已继续");
   return (
     <Container>
       <Header />

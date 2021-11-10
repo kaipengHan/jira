@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // 是否为0
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
@@ -76,14 +76,17 @@ export const useArray = <P>(persons: P[]) => {
 };
 // 修改页面标题  keepOnUnMount:是否上一个页面的标题
 export const useDocumentTitle = (title: string, keepOnUnMount?: boolean) => {
-  const oldTitle = document.title;
+  // const oldTitle = document.title;
+  const oldTitle = useRef(document.title).current;
   useEffect(() => {
     document.title = title;
+  }, [title]);
+
+  useEffect(() => {
     return () => {
       if (keepOnUnMount) {
         document.title = oldTitle;
       }
     };
-    //  eslint-disable-next-line
-  }, [title]);
+  }, [oldTitle, keepOnUnMount]);
 };
