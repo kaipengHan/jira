@@ -97,3 +97,7 @@ type:
 
 下载之后请在项目入口文件（index.tsx）文件中引入相关 less 文件 为什么要引入 less 文件 因为要根据 less 文件修改 antd 的主题色
 自定义主题需要用到[craco](https://www.npmjs.com/package/@craco/craco)这个库 在 create-react-app 中自定义主题文件配置请[参考](https://ant.design/docs/react/use-with-create-react-app-cn)
+
+# typescript
+
+在编写类声明文件（.d.ts）时，declare 表示声明作用

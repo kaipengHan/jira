@@ -5,9 +5,14 @@ import styled from "@emotion/styled";
 import { Row } from "components/Lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
-import { Routes, Route } from "react-router";
-import { BrowserRouter as Router, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Routes,
+  Route,
+} from "react-router-dom";
 import ProjectScreen from "./screens/project";
+import NotFound from "./screens/notFound";
 
 /**
  * grid 和 flex 各自的应用场景
@@ -53,6 +58,7 @@ const AuthenticatedApp = () => {
               element={<ProjectScreen />}
             />
             <Route index element={<Navigate replace to="projects" />} />
+            <Route path={"*"} element={<NotFound />} />
           </Routes>
         </Router>
       </Main>
