@@ -90,3 +90,5 @@ export const useDocumentTitle = (title: string, keepOnUnMount?: boolean) => {
     };
   }, [oldTitle, keepOnUnMount]);
 };
+// 回到首页
+export const backHome = () => (window.location.href = window.location.origin);

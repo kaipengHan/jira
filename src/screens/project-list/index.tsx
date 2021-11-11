@@ -6,12 +6,15 @@ import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { Project } from "types/project";
+import { useUrlQueryParam } from "../../utils/url";
 
 const ProjectListScreen = () => {
-  const [param, setParam] = useState<Partial<Project>>({
+  const [, setParam] = useState<Partial<Project>>({
     name: "",
     personId: "",
   });
+  const [param] = useUrlQueryParam(["name", "personId"]);
+
   const debounceParam = useDebounce(param, 200);
   const [users, setUsers] = useState([]);
   useDocumentTitle("项目列表", true);
@@ -28,6 +31,8 @@ const ProjectListScreen = () => {
     </Container>
   );
 };
+
+ProjectListScreen.whyDidYouRender = true;
 
 export default ProjectListScreen;
 

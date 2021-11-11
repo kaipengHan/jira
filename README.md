@@ -76,6 +76,8 @@ type:
 - ![img.png](img.png) 如果出现此错误，请运行 npx msw init public
 - 引入 svg 后在项目中以 svg 的形式显示 而不是 img 标签形式展示 import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg'; 参照 src/authenticatedApp 中引入方式
 - react-query
+- 单页应用中使用 url 进行状态管理 场景：页面进行了搜索 复制这个链接发给别人 别人打开之后就是搜索好的内容
+- 查找页面为啥会重复渲染 库：why-did-you-render
 
 # json-server 配置自定义请求
 
@@ -101,3 +103,4 @@ type:
 # typescript
 
 在编写类声明文件（.d.ts）时，declare 表示声明作用
+as const
