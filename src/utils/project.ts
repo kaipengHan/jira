@@ -15,3 +15,37 @@ export const useProjects = (param?: Partial<Project>) => {
   }, [param]);
   return result;
 };
+// 添加项目
+export const useAddProjects = () => {
+  const client = useHttp();
+  const { run, ...asyncResult } = useAsync<Project[]>();
+  const mutate = (params: Partial<Project>) => {
+    return run(
+      client(`projects/${params.id}`, {
+        data: params,
+        method: "POST",
+      })
+    );
+  };
+  return {
+    mutate,
+    ...asyncResult,
+  };
+};
+// 编辑项目收藏
+export const useEditProjects = () => {
+  const client = useHttp();
+  const { run, ...asyncResult } = useAsync<Project[]>();
+  const mutate = (params: Partial<Project>) => {
+    return run(
+      client(`projects/${params.id}`, {
+        data: params,
+        method: "PATCH",
+      })
+    );
+  };
+  return {
+    mutate,
+    ...asyncResult,
+  };
+};

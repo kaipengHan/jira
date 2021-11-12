@@ -14,19 +14,30 @@ const ProjectListScreen = () => {
   useDocumentTitle("项目列表", true);
   const client = useHttp();
   const { isLoading, data: list } = useProjects(debounceParam);
-  useMount(() => {
+  const loadUserData = () => {
     client("users").then(setUsers);
+  };
+  const ListLoad = () => {
+    loadUserData();
+  };
+  useMount(() => {
+    loadUserData();
   });
   return (
     <Container>
       <h1>项目列表</h1>
       <SearchPanel users={users} param={param} setParam={setParam} />
-      <List loading={isLoading} users={users} dataSource={list || []} />
+      <List
+        loading={isLoading}
+        users={users}
+        onLoad={() => ListLoad()}
+        dataSource={list || []}
+      />
     </Container>
   );
 };
 
-ProjectListScreen.whyDidYouRender = true;
+// ProjectListScreen.whyDidYouRender = true;
 
 export default ProjectListScreen;
 
