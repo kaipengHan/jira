@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
 import { User } from "types/user";
 import { Project } from "../../types/project";
+import { IdSelect } from "../../components/id-select";
 
 interface SearchPanelProps {
   users: User[];
@@ -20,17 +21,12 @@ const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
         />
       </Form.Item>
       <Form.Item>
-        <Select
+        <IdSelect
           value={param.personId}
-          onChange={(e) => setParam({ ...param, personId: e })}
-        >
-          <Select.Option value={""}>负责人</Select.Option>
-          {users.map((item) => (
-            <Select.Option value={String(item.id)} key={item.id}>
-              {item.name}
-            </Select.Option>
-          ))}
-        </Select>
+          defaultOptionName={"负责人"}
+          options={users}
+          onChange={(value) => setParam({ ...param, personId: value })}
+        />
       </Form.Item>
     </Form>
   );
