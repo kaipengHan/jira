@@ -13,13 +13,11 @@ const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
   useDocumentTitle("项目列表", true);
   const client = useHttp();
-  const { isLoading, data: list } = useProjects(debounceParam);
+  const { isLoading, data: list, retry } = useProjects(debounceParam);
   const loadUserData = () => {
     client("users").then(setUsers);
   };
-  const ListLoad = () => {
-    loadUserData();
-  };
+
   useMount(() => {
     loadUserData();
   });
@@ -30,7 +28,7 @@ const ProjectListScreen = () => {
       <List
         loading={isLoading}
         users={users}
-        onLoad={() => ListLoad()}
+        onLoad={() => retry()}
         dataSource={list || []}
       />
     </Container>
