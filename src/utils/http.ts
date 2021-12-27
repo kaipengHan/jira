@@ -1,4 +1,5 @@
 import qs from "qs";
+import { useCallback } from "react";
 import { logout } from "../auth-provider";
 import { useAuth } from "../context/auth-context";
 
@@ -46,10 +47,12 @@ export const http = async (
 
 export const useHttp = () => {
   const { user } = useAuth();
-  return (...[endpoint, config]: Parameters<typeof http>) =>
-    http(endpoint, { ...config, token: user?.token });
+  return useCallback(
+    (...[endpoint, config]: Parameters<typeof http>) =>
+      http(endpoint, { ...config, token: user?.token }),
+    [user?.token]
+  );
 };
-
 // JS 中的typeof，是在runtime时运行的
 // return typeof 1 === 'number'
 
