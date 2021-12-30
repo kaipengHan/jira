@@ -1,5 +1,5 @@
 // 请求列表的自定义hook
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useAsync } from "./use-async";
 import { cleanObject } from "./index";
 import { useHttp } from "./http";
@@ -9,8 +9,10 @@ import { Project } from "../types/project";
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
   const { run, ...result } = useAsync<Project[]>();
-  const fetchProjects = () =>
-    client("projects", { data: cleanObject(param || {}) });
+  const fetchProjects = useCallback(
+    () => client("projects", { data: cleanObject(param || {}) }),
+    [client, param]
+  );
   useEffect(() => {
     run(fetchProjects(), {
       retry: fetchProjects,
