@@ -14,6 +14,8 @@ import {
 import ProjectScreen from "./screens/project";
 import NotFound from "./screens/notFound";
 import { backHome } from "./utils";
+import ProjectPopover from "components/project-popover";
+import { ButtonNoPadding } from "components/Lib";
 
 /**
  * grid 和 flex 各自的应用场景
@@ -26,12 +28,6 @@ import { backHome } from "./utils";
  * 从布局出发，用grid
  *
  */
-
-const Container = styled.div`
-  display: grid;
-  grid-template-rows: 6rem 1fr;
-  height: 100vh;
-`;
 
 // grid-area 用来给grid子元素起名字
 const Header = styled(Row)`
@@ -68,35 +64,45 @@ const AuthenticatedApp = () => {
 };
 
 const PageHeader = () => {
-  const { logout, user } = useAuth();
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <Button type={"link"} onClick={() => backHome()}>
+        <ButtonNoPadding type={"link"} onClick={() => backHome()}>
           <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-        </Button>
-        <h3>项目</h3>
+        </ButtonNoPadding>
+        <ProjectPopover />
         <h3>列表</h3>
       </HeaderLeft>
       <HeaderRight>
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item key={"logout"}>
-                <Button type={"link"} onClick={logout}>
-                  登出
-                </Button>
-              </Menu.Item>
-            </Menu>
-          }
-        >
-          <Button type={"link"} onClick={(e) => e.preventDefault()}>
-            Hi,{user?.name}
-          </Button>
-        </Dropdown>
+        <User />
       </HeaderRight>
     </Header>
   );
 };
-
+const User = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Dropdown
+      overlay={
+        <Menu>
+          <Menu.Item key={"logout"}>
+            <Button onClick={logout} type={"link"}>
+              登出
+            </Button>
+          </Menu.Item>
+        </Menu>
+      }
+    >
+      <Button type={"link"} onClick={(e) => e.preventDefault()}>
+        Hi, {user?.name}
+      </Button>
+    </Dropdown>
+  );
+};
+// temporal dead zone(暂时性死区)
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+  height: 100vh;
+`;
 export default AuthenticatedApp;
