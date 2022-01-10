@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, TableProps } from "antd";
+import { Table, TableProps, Dropdown, Menu } from "antd";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import { User } from "types/user";
@@ -8,6 +8,9 @@ import { Project } from "types/project";
 import { Link } from "react-router-dom";
 import Pin from "../../components/pin";
 import { useEditProjects } from "../../utils/project";
+import { ButtonNoPadding } from "../../components/Lib";
+import { useDispatch } from "react-redux";
+import { projectListActions } from "screens/project-list/project-list.slice";
 
 interface ListProps extends TableProps<Project> {
   users: User[];
@@ -15,6 +18,7 @@ interface ListProps extends TableProps<Project> {
 }
 // <Link to={String(project.id)}> 会默认认为是当前路由下的子路由
 const List = ({ users, onLoad, ...props }: ListProps) => {
+  const dispatch = useDispatch();
   const { mutate } = useEditProjects();
   const pinProject = (id: number, pin: boolean) => {
     mutate({ id, pin });
@@ -59,6 +63,30 @@ const List = ({ users, onLoad, ...props }: ListProps) => {
           {value.created ? dayjs(value.created).format("YYYY-MM-DD") : "无"}
         </div>
       ),
+    },
+    {
+      render(value, project) {
+        return (
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key={"edit"}>
+                  <ButtonNoPadding
+                    onClick={() =>
+                      dispatch(projectListActions.openProjectModal())
+                    }
+                    type={"link"}
+                  >
+                    编辑
+                  </ButtonNoPadding>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
+          </Dropdown>
+        );
+      },
     },
   ];
   return (
