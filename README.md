@@ -58,3 +58,4 @@ type:
 在编写类声明文件（.d.ts）时，declare 表示声明作用
 as const
 Pick 从某个类型中取出某些类型
+ReturnType: 读取函数的返回值类型
