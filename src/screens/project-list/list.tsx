@@ -65,16 +65,16 @@ const List = ({ users, onLoad, ...props }: ListProps) => {
       ),
     },
     {
-      render(value, project) {
+      render() {
         return (
           <Dropdown
             overlay={
               <Menu>
                 <Menu.Item key={"edit"}>
                   <ButtonNoPadding
-                    onClick={() =>
-                      dispatch(projectListActions.openProjectModal())
-                    }
+                    onClick={() => {
+                      dispatch(projectListActions.openProjectModal());
+                    }}
                     type={"link"}
                   >
                     编辑

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import List from "./list";
 import SearchPanel from "./search-panel";
 import { useDebounce, useDocumentTitle, useMount } from "../../utils";
@@ -7,8 +8,10 @@ import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { useUrlQueryParam } from "../../utils/url";
 import { ButtonNoPadding, Row } from "components/Lib";
+import { projectListActions } from "./project-list.slice";
 
 const ProjectListScreen = () => {
+  const dispatch = useDispatch();
   const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const debounceParam = useDebounce(param, 200);
   const [users, setUsers] = useState([]);
@@ -26,7 +29,14 @@ const ProjectListScreen = () => {
     <Container>
       <Row marginBottom={2} between={true}>
         <h1>项目列表</h1>
-        <ButtonNoPadding type={"link"}>创建项目</ButtonNoPadding>
+        <ButtonNoPadding
+          type={"link"}
+          onClick={() => {
+            dispatch(projectListActions.openProjectModal());
+          }}
+        >
+          创建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPanel users={users} param={param} setParam={setParam} />
       <List

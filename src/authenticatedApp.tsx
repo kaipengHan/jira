@@ -15,6 +15,7 @@ import ProjectScreen from "./screens/project";
 import NotFound from "./screens/notFound";
 import { backHome } from "./utils";
 import ProjectPopover from "components/project-popover";
+import { ProjectModal } from "./screens/project-list/project-modal";
 import { ButtonNoPadding } from "components/Lib";
 
 /**
@@ -59,6 +60,7 @@ const AuthenticatedApp = () => {
           </Routes>
         </Router>
       </Main>
+      <ProjectModal />
     </Container>
   );
 };

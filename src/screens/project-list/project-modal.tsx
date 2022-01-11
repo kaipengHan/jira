@@ -10,7 +10,6 @@ export const ProjectModal = () => {
   const dispatch = useDispatch();
   const projectModalOpen = useSelector(selectProjectModalOpen);
   console.log(projectModalOpen);
-  console.log(projectModalOpen, "open");
   return (
     <Drawer
       onClose={() => dispatch(projectListActions.closeProjectModal())}
